@@ -44,11 +44,10 @@
             text-decoration: underline;
         }
 
-        input[type="text"],
-        select {
+        input[type="text"] {
             padding: 0.5rem;
             margin-bottom: 1rem;
-            margin-right: 1rem;
+            width: 100%;
             background-color: #1c1c1c;
             color: #e2e2e2;
             border: 1px solid #333;
@@ -85,29 +84,6 @@
 
         <h2>📄 Live Catalog</h2>
         <input type="text" id="searchInput" placeholder="Search entries...">
-
-        <div style="margin-bottom: 1rem;">
-            <label>Initials:</label>
-            <select id="filterInitials" onchange="filterTable()">
-                <option value="">All</option>
-            </select>
-
-            <label>ZIP Suffix:</label>
-            <select id="filterZip" onchange="filterTable()">
-                <option value="">All</option>
-            </select>
-
-            <label>Postmark Date:</label>
-            <select id="filterDate" onchange="filterTable()">
-                <option value="">All</option>
-            </select>
-
-            <label>Medium:</label>
-            <select id="filterMedium" onchange="filterTable()">
-                <option value="">All</option>
-            </select>
-        </div>
-
         <table id="catalogTable">
             <thead>
                 <tr>
@@ -118,8 +94,21 @@
                     <th>Notes</th>
                 </tr>
             </thead>
-            <tbody id="catalogBody">
-                <!-- Data will be populated here -->
+            <tbody>
+                <tr>
+                    <td>KM</td>
+                    <td>17</td>
+                    <td>2025-03-04</td>
+                    <td>Letter</td>
+                    <td>Handwritten w/ doodles</td>
+                </tr>
+                <tr>
+                    <td>JD</td>
+                    <td>09</td>
+                    <td>2025-03-07</td>
+                    <td>Card</td>
+                    <td>Sent via Pigeonly</td>
+                </tr>
             </tbody>
         </table>
 
@@ -137,85 +126,24 @@
     </section>
 
     <script>
-        async function loadCatalog() {
-            const response = await fetch("mangione_mail_catalog.json");
-            const data = await response.json();
-            const tbody = document.getElementById("catalogBody");
-            const initialsSet = new Set();
-            const zipSet = new Set();
-            const dateSet = new Set();
-            const mediumSet = new Set();
+        const searchInput = document.getElementById('searchInput');
+        const table = document.getElementById('catalogTable');
+        const rows = table.getElementsByTagName('tr');
 
-            data.forEach(entry => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${entry.Initials}</td>
-                    <td>${entry["ZIP Suffix"]}</td>
-                    <td>${entry["Postmark Date"]}</td>
-                    <td>${entry.Medium}</td>
-                    <td>${entry.Notes || ""}</td>
-                `;
-                tbody.appendChild(row);
-
-                initialsSet.add(entry.Initials);
-                zipSet.add(entry["ZIP Suffix"]);
-                dateSet.add(entry["Postmark Date"]);
-                mediumSet.add(entry.Medium);
-            });
-
-            populateFilters("filterInitials", initialsSet);
-            populateFilters("filterZip", zipSet);
-            populateFilters("filterDate", dateSet);
-            populateFilters("filterMedium", mediumSet);
-        }
-
-        function populateFilters(id, values) {
-            const select = document.getElementById(id);
-            Array.from(values).sort().forEach(value => {
-                const option = document.createElement("option");
-                option.value = value;
-                option.textContent = value;
-                select.appendChild(option);
-            });
-        }
-
-        function filterTable() {
-            const initialsFilter = document.getElementById("filterInitials").value.toLowerCase();
-            const zipFilter = document.getElementById("filterZip").value.toLowerCase();
-            const dateFilter = document.getElementById("filterDate").value.toLowerCase();
-            const mediumFilter = document.getElementById("filterMedium").value.toLowerCase();
-
-            const rows = document.querySelectorAll("#catalogBody tr");
-
-            rows.forEach(row => {
-                const cells = row.querySelectorAll("td");
-                const [initials, zip, date, medium] = [cells[0], cells[1], cells[2], cells[3]];
-
-                const showRow =
-                    (!initialsFilter || initials.textContent.toLowerCase().includes(initialsFilter)) &&
-                    (!zipFilter || zip.textContent.toLowerCase().includes(zipFilter)) &&
-                    (!dateFilter || date.textContent.toLowerCase().includes(dateFilter)) &&
-                    (!mediumFilter || medium.textContent.toLowerCase().includes(mediumFilter));
-
-                row.style.display = showRow ? "" : "none";
-            });
-        }
-
-        document.getElementById('searchInput').addEventListener('keyup', function () {
-            const filter = this.value.toLowerCase();
-            const rows = document.querySelectorAll("#catalogBody tr");
-
-            rows.forEach(row => {
-                const cells = row.querySelectorAll("td");
+        searchInput.addEventListener('keyup', function () {
+            const filter = searchInput.value.toLowerCase();
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
                 let match = false;
-                cells.forEach(cell => {
-                    if (cell.textContent.toLowerCase().includes(filter)) match = true;
-                });
-                row.style.display = match ? "" : "none";
-            });
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
+                        match = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = match ? '' : 'none';
+            }
         });
-
-        loadCatalog();
     </script>
 </body>
 
