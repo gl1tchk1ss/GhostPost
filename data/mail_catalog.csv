@@ -1,0 +1,93 @@
+received_date,sender_initials,origin_type,origin_value,postmark_date,postmark_raw,postmark_status,source_page,source_entry,source_marker,raw_entry,transcription_status,notes
+2026-04-06,BB,zip_suffix,01,2026-03-31,3/31,known,82,1,,BB-01 3/31,reviewed,
+2026-04-06,D?,geographic_label,Canada,2026-03-26,3/26,known,82,2,,D?-[Canada] 3/26,needs_review,Second sender initial is unclear in source.
+2026-04-06,IL,unknown,?,,?,unknown,82,3,,IL-? ?,needs_review,ZIP/geographic value and postmark are unclear in source.
+2026-04-06,JH,zip_suffix,01,2026-04-01,4/1,known,82,4,,JH-01 4/1,reviewed,
+2026-04-06,KJ,zip_suffix,22,2026-04-01,4/1,known,82,5,,KJ-22 4/1,reviewed,
+2026-04-06,LH,zip_suffix,04,2026-04-01,4/1,known,82,6,,LH-04 4/1,reviewed,
+2026-04-06,?F,zip_suffix,86,2026-04-01,4/1,known,82,7,,?F-86 4/1,needs_review,First sender initial is unclear in source.
+2026-04-07,AG,geographic_label,Poland,2026-03-28,3/28,known,82,8,1,AG-[Poland] 3/28¹,reviewed,Superscript marker preserved from source; semantics not yet mapped.
+2026-04-07,B?,zip_suffix,08,2026-03-30,3/30,known,82,9,,B?-08 3/30,needs_review,Second sender initial is unclear in source.
+2026-04-07,CM,zip_suffix,09,2026-04-03,4/3,known,82,10,,CM-09 4/3,reviewed,
+2026-04-07,DB,zip_suffix,94,2026-04-03,4/3,known,82,11,,DB-94 4/3,reviewed,
+2026-04-07,IC,geographic_label,UK,2026-03-23,3/23,known,82,12,,IC-[UK] 3/23,reviewed,
+2026-04-07,JA,zip_suffix,93,2026-04-03,4/3,known,82,13,,JA-93 4/3,reviewed,
+2026-04-07,KR,zip_suffix,08,2026-04-03,4/3,known,82,14,,KR-08 4/3,reviewed,
+2026-04-07,TN,geographic_label,UK,2026-04-02,4/2,known,82,15,,TN-[UK] 4/2,reviewed,
+2026-04-08,AA,zip_suffix,44,2026-04-04,4/4,known,82,16,,AA-44 4/4,reviewed,
+2026-04-08,BO,geographic_label,Puerto Rico,2026-04-02,4/2,known,82,17,,BO-[Puerto Rico] 4/2,reviewed,
+2026-04-08,IV,zip_suffix,34,2026-04-04,4/4,known,82,18,,IV-34 4/4,reviewed,
+2026-04-08,JU,zip_suffix,97,2026-04-06,4/6,known,82,19,,JU-97 4/6,reviewed,
+2026-04-08,SW,zip_suffix,18,2026-04-02,4/2,known,82,20,,SW-18 4/2,reviewed,
+2026-04-08,SM,zip_suffix,03,2026-04-02,4/2,known,82,21,,SM-03 4/2,reviewed,
+2026-04-08,TC,zip_suffix,09,2026-04-06,4/6,known,82,22,,TC-09 4/6,reviewed,
+2026-04-09,AC,zip_suffix,01,2026-04-07,4/7,known,82,23,,AC-01 4/7,reviewed,
+2026-04-09,HO,zip_suffix,81,2026-04-06,4/6,known,82,24,,HO-81 4/6,reviewed,
+2026-04-09,HZ,zip_suffix,40,2026-04-06,4/6,known,82,25,,HZ-40 4/6,reviewed,
+2026-04-09,JD,zip_suffix,41,2026-04-06,4/6,known,82,26,,JD-41 4/6,reviewed,
+2026-04-09,SM,zip_suffix,05,2026-04-07,4/7,known,82,27,,SM-05 4/7,reviewed,
+2026-04-10,CB,zip_suffix,41,2026-04-07,4/7,known,82,28,,CB-41 4/7,reviewed,
+2026-04-10,KF,zip_suffix,13,2026-04-07,4/7,known,82,29,,KF-13 4/7,reviewed,
+2026-04-10,KR,zip_suffix,19,2026-04-07,4/7,known,82,30,,KR-19 4/7,reviewed,
+2026-04-10,SM,zip_suffix,03,2026-04-07,4/7,known,82,31,,SM-03 4/7,reviewed,
+2026-04-13,AS,geographic_label,UK,2026-03-31,3/31,known,82,32,1,AS-[UK] 3/31¹,reviewed,Superscript marker preserved from source; semantics not yet mapped.
+2026-04-13,DC,geographic_label,Mongolia,2026-01-23,1/23,known,82,33,,DC-[Mongolia] 1/23,reviewed,
+2026-04-13,DC,geographic_label,Mongolia,2026-02-17,2/17,known,82,34,1,DC-[Mongolia] 2/17¹,reviewed,Superscript marker preserved from source; semantics not yet mapped.
+2026-04-13,JF,zip_suffix,04,2026-03-26,3/26,known,82,35,,JF-04 3/26,reviewed,
+2026-04-13,L,zip_suffix,23,2026-04-10,4/10,known,82,36,,L-23 4/10,needs_review,Source appears to show a single sender initial.
+2026-04-13,MK,zip_suffix,05,2026-04-09,4/9,known,82,37,,MK-05 4/9,reviewed,
+2026-04-13,MT,zip_suffix,64,2026-04-07,4/7,known,82,38,,MT-64 4/7,reviewed,
+2026-04-13,MG,zip_suffix,92,2026-04-09,4/9,known,82,39,,MG-92 4/9,reviewed,
+2026-04-13,MM,geographic_label,Italy,2026-03-19,3/19,known,82,40,,MM-[Italy] 3/19,reviewed,
+2026-04-13,SR,geographic_label,Canada,2026-03-31,3/31,known,82,41,1,SR-[Canada] 3/31¹,reviewed,Superscript marker preserved from source; semantics not yet mapped.
+2026-04-14,CY,geographic_label,China,2026-03-08,3/8,known,82,42,1,CY-[China] 3/8¹,reviewed,Superscript marker preserved from source; semantics not yet mapped.
+2026-04-14,JB,zip_suffix,22,2026-04-09,4/9,known,82,43,,JB-22 4/9,reviewed,
+2026-04-14,MH,zip_suffix,07,2026-04-09,4/9,known,82,44,,MH-07 4/9,reviewed,
+2026-04-14,MS,geographic_label,Spain,2026-04-01,4/1,known,82,45,,MS-[Spain] 4/1,reviewed,
+2026-04-14,SD,geographic_label,Canada,,?,unknown,82,46,,SD-[Canada] ?,needs_review,Postmark is recorded as unknown in source.
+2026-04-14,V?,geographic_label,Russia,2025-07-21,7/21/25,known,82,47,,V?-[Russia] 7/21/25,needs_review,Second sender initial is unclear in source.
+2026-04-14,V?,geographic_label,Russia,2025-09-17,9/17/25,known,82,48,1,V?-[Russia] 9/17/25¹,needs_review,Second sender initial is unclear; superscript marker preserved from source.
+2026-04-14,YH,zip_suffix,22,2026-04-06,4/6,known,82,49,,YH-22 4/6,reviewed,
+2026-04-15,AC,zip_suffix,01,2026-04-13,4/13,known,82,50,,AC-01 4/13,reviewed,
+2026-04-15,EB,zip_suffix,28,2026-04-13,4/13,known,82,51,,EB-28 4/13,reviewed,
+2026-04-15,??,geographic_label,Canada,,?,unknown,82,52,,??-[Canada] ?,needs_review,Sender initials and postmark are unclear in source.
+2026-04-17,AK,zip_suffix,32,2026-04-14,4/14,known,82,53,,AK-32 4/14,reviewed,
+2026-04-17,EB,zip_suffix,28,2026-04-14,4/14,known,82,54,,EB-28 4/14,reviewed,
+2026-04-17,EM,geographic_label,Luxembourg,2026-04-03,4/3,known,82,55,,EM-[Luxembourg] 4/3,reviewed,
+2026-04-17,ES,zip_suffix,69,2026-04-11,4/11,known,82,56,,ES-69 4/11,reviewed,
+2026-04-17,HL,zip_suffix,22,2026-04-11,4/11,known,82,57,,HL-22 4/11,reviewed,
+2026-04-17,JC,zip_suffix,31,2026-04-13,4/13,known,82,58,,JC-31 4/13,reviewed,
+2026-04-17,JG,zip_suffix,28,2026-04-10,4/10,known,82,59,1,JG-28 4/10¹,reviewed,Superscript marker appears in source; verify marker value.
+2026-04-17,KS,zip_suffix,17,2026-04-14,4/14,known,82,60,,KS-17 4/14,reviewed,
+2026-04-17,LH,zip_suffix,15,2026-04-11,4/11,known,82,61,,LH-15 4/11,reviewed,
+2026-04-17,MR,zip_suffix,46,2026-04-13,4/13,known,82,62,,MR-46 4/13,reviewed,
+2026-04-17,RC,zip_suffix,38,2026-04-14,4/14,known,82,63,,RC-38 4/14,reviewed,
+2026-04-17,ST,zip_suffix,40,2026-04-13,4/13,known,82,64,,ST-40 4/13,reviewed,
+2026-04-17,TN,geographic_label,UK,2026-04-13,4/13,known,82,65,,TN-[UK] 4/13,reviewed,
+2026-04-17,TS,zip_suffix,07,2026-04-13,4/13,known,82,66,,TS-07 4/13,reviewed,
+2026-04-20,ET,zip_suffix,40,2026-04-14,4/14,known,82,67,,ET-40 4/14,reviewed,
+2026-04-20,HM,zip_suffix,04,2026-04-15,4/15,known,82,68,,HM-04 4/15,reviewed,
+2026-04-20,MA,geographic_label,UK,,?,unknown,82,69,,MA-[UK] ?,needs_review,Postmark is recorded as unknown in source.
+2026-04-20,PL,zip_suffix,06,2026-04-15,4/15,known,82,70,,PL-06 4/15,reviewed,
+2026-04-20,PK,zip_suffix,31,2026-04-14,4/14,known,82,71,,PK-31 4/14,reviewed,
+2026-04-20,SR,zip_suffix,04,2026-04-17,4/17,known,82,72,,SR-04 4/17,reviewed,
+2026-04-20,SV,zip_suffix,68,2026-04-17,4/17,known,82,73,,SV-68 4/17,reviewed,
+2026-04-20,SB,zip_suffix,33,2026-04-17,4/17,known,82,74,,SB-33 4/17,reviewed,
+2026-04-20,TM,zip_suffix,34,2026-04-17,4/17,known,82,75,,TM-34 4/17,reviewed,
+2026-04-20,WR,zip_suffix,19,2026-04-15,4/15,known,82,76,,WR-19 4/15,reviewed,
+2026-04-20,YY,geographic_label,UK,2026-04-09,4/9,known,82,77,,YY-[UK] 4/9,reviewed,
+2026-04-21,AS,zip_suffix,20,2026-04-15,4/15,known,82,78,,AS-20 4/15,reviewed,
+2026-04-21,BH,zip_suffix,06,2026-04-17,4/17,known,82,79,,BH-06 4/17,reviewed,
+2026-04-21,BO,geographic_label,Puerto Rico,2026-04-16,4/16,known,82,80,,BO-[Puerto Rico] 4/16,reviewed,
+2026-04-21,CK,zip_suffix,03,2026-04-18,4/18,known,82,81,,CK-03 4/18,reviewed,
+2026-04-21,DL,geographic_label,Australia,2026-03-24,3/24,known,82,82,?,DL-[Australia] 3/24^?,needs_review,Source includes a superscript marker; marker value is unclear.
+2026-04-21,GM,geographic_label,UK,,?,unknown,82,83,,GM-[UK] ?,needs_review,Postmark is recorded as unknown in source.
+2026-04-21,JS,zip_suffix,31,2026-04-14,4/14,known,82,84,,JS-31 4/14,reviewed,
+2026-04-21,KC,zip_suffix,05,2026-04-16,4/16,known,82,85,,KC-05 4/16,reviewed,
+2026-04-21,LF,zip_suffix,09,2026-04-16,4/16,known,82,86,,LF-09 4/16,reviewed,
+2026-04-21,MC,zip_suffix,17,2026-04-14,4/14,known,82,87,,MC-17 4/14,reviewed,
+2026-04-21,RN,zip_suffix,11,2026-04-16,4/16,known,82,88,,RN-11 4/16,reviewed,
+2026-04-21,TM,geographic_label,Brazil,2026-03-12,3/12,known,82,89,2,TM-[Brazil] 3/12²,reviewed,Superscript marker preserved from source; semantics not yet mapped.
+2026-04-22,CF,geographic_label,Spain,2026-04-16,4/16,known,82,90,,CF-[Spain] 4/16,reviewed,
+2026-04-22,MB,zip_suffix,05,2026-04-15,4/15,known,82,91,,MB-05 4/15,reviewed,
+2026-04-22,TB,zip_suffix,17,2026-04-16,4/16,known,82,92,,TB-17 4/16,reviewed,

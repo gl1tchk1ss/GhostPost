@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "primary_source": {
+    "publisher": "Luigi Mangione Legal Defense Information",
+    "catalog_page_url": "https://www.luigimangioneinfo.com/pages/mail-catalog/",
+    "document_url": "https://cdn.sanity.io/files/detu0qji/production/eeed4c041d7ad41d72f0c5f2ec7e969e9ccfa169.pdf",
+    "document_title": "MDC Mail Log 12.26.24 – 04.26.26",
+    "coverage_start": "2024-12-26",
+    "coverage_end": "2026-04-26",
+    "page_count": 82,
+    "retrieved_date": "2026-08-19",
+    "notes": "Official source linked from the legal defense team's Mail Catalog page. GhostPost does not mirror the PDF; source-page references are retained for auditability."
+  }
+}

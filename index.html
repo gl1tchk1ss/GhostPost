@@ -1,150 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GhostPost</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Fira Mono', monospace;
-            background-color: #0f0f0f;
-            color: #e2e2e2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: start;
-            padding: 2rem;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GhostPost: an unofficial searchable transcription of public mail-catalog metadata.">
+  <title>GhostPost</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d0f;
+      --panel: #11151a;
+      --panel-2: #171c22;
+      --text: #e8edf2;
+      --muted: #9aa6b2;
+      --line: #29313a;
+      --accent: #8de2ff;
+      --warn: #ffd479;
+      --ok: #a7e6b0;
+    }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.2rem;
-        }
+    * { box-sizing: border-box; }
 
-        p.tagline {
-            font-style: italic;
-            color: #9b9b9b;
-            margin-bottom: 2rem;
-        }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      line-height: 1.5;
+    }
 
-        section {
-            max-width: 800px;
-            width: 100%;
-        }
+    main {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 3rem 0 5rem;
+    }
 
-        a {
-            color: #9be7ff;
-            text-decoration: none;
-        }
+    h1 { margin: 0; font-size: clamp(2.4rem, 8vw, 4.8rem); letter-spacing: -0.06em; }
+    h2 { margin-top: 2.25rem; }
+    p { max-width: 82ch; }
+    a { color: var(--accent); }
 
-        a:hover {
-            text-decoration: underline;
-        }
+    .tagline, .muted { color: var(--muted); }
+    .tagline { margin-top: .25rem; }
 
-        input[type="text"] {
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            width: 100%;
-            background-color: #1c1c1c;
-            color: #e2e2e2;
-            border: 1px solid #333;
-        }
+    .notice {
+      margin: 2rem 0;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: .65rem;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 2rem;
-        }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: .75rem;
+      margin: 1.5rem 0;
+    }
 
-        th,
-        td {
-            padding: 0.5rem;
-            border: 1px solid #333;
-            text-align: left;
-        }
+    .stat {
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: .65rem;
+    }
 
-        th {
-            background-color: #1c1c1c;
-        }
-    </style>
+    .stat strong { display: block; font-size: 1.6rem; }
+    .stat span { color: var(--muted); font-size: .85rem; }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, minmax(145px, 1fr));
+      gap: .75rem;
+      margin: 1rem 0;
+    }
+
+    input, select {
+      width: 100%;
+      padding: .72rem .8rem;
+      border: 1px solid var(--line);
+      border-radius: .45rem;
+      background: var(--panel-2);
+      color: var(--text);
+      font: inherit;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: .65rem;
+    }
+
+    table { width: 100%; border-collapse: collapse; min-width: 850px; }
+    th, td { padding: .7rem .75rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { position: sticky; top: 0; background: var(--panel-2); color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:hover { background: #121920; }
+
+    .badge {
+      display: inline-block;
+      padding: .12rem .42rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: .78rem;
+      white-space: nowrap;
+    }
+
+    .badge.review { color: var(--warn); }
+    .badge.ok { color: var(--ok); }
+    .empty, .error { padding: 1rem; color: var(--muted); }
+    .error { color: var(--warn); }
+    footer { margin-top: 3rem; color: var(--muted); font-size: .85rem; }
+
+    @media (max-width: 800px) {
+      main { width: min(100% - 1rem, 1180px); padding-top: 1.5rem; }
+      .filters { grid-template-columns: 1fr 1fr; }
+      .filters input { grid-column: 1 / -1; }
+    }
+  </style>
 </head>
-
 <body>
-    <h1>GhostPost</h1>
-    <p class="tagline">Tracking letters that were never meant to vanish.</p>
+  <main>
+    <header>
+      <h1>GhostPost</h1>
+      <p class="tagline">Tracking the public metadata behind a handwritten mail catalog.</p>
+    </header>
 
-    <section>
-        <h2>📦 About</h2>
-        <p><strong>GhostPost</strong> is an independent, unofficial catalog of correspondence sent to Luigi Mangione.
-            The goal is to preserve transparency and document mail interactions using initials, ZIP suffixes, postmark
-            dates, and basic metadata—never full names or letter contents.</p>
-
-        <h2>📄 Live Catalog</h2>
-        <input type="text" id="searchInput" placeholder="Search entries...">
-        <table id="catalogTable">
-            <thead>
-                <tr>
-                    <th>Initials</th>
-                    <th>ZIP Suffix</th>
-                    <th>Postmark Date</th>
-                    <th>Medium</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>KM</td>
-                    <td>17</td>
-                    <td>2025-03-04</td>
-                    <td>Letter</td>
-                    <td>Handwritten w/ doodles</td>
-                </tr>
-                <tr>
-                    <td>JD</td>
-                    <td>09</td>
-                    <td>2025-03-07</td>
-                    <td>Card</td>
-                    <td>Sent via Pigeonly</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2>🕵️ Submit an Entry</h2>
-        <p>To contribute, submit a pull request to the <code>ghostpost</code> repo on GitHub or contact the maintainer
-            via secure channels. Please do not include full names or identifying info. This is a space for ghosts, not
-            profiles.</p>
-
-        <h2>🔐 Disclaimers</h2>
-        <p>This project is not affiliated with Luigi Mangione, his legal team, or any campaign. It is an archival
-            community effort to document postal transparency and support free expression.</p>
-
-        <p><a href="https://github.com/YOURUSERNAME/ghostpost" target="_blank">View the GhostPost repository on
-                GitHub</a></p>
+    <section class="notice" aria-live="polite">
+      <strong>Transcription in progress.</strong>
+      <span id="coverageText"> Loading catalog coverage…</span>
     </section>
 
-    <script>
-        const searchInput = document.getElementById('searchInput');
-        const table = document.getElementById('catalogTable');
-        const rows = table.getElementsByTagName('tr');
+    <section>
+      <h2>About</h2>
+      <p>
+        GhostPost is an independent, unofficial transcription of correspondence metadata published in the
+        Luigi Mangione legal defense team's public mail catalog. It records dates, sender initials, limited
+        location metadata, postmarks, and source-page provenance. It does not publish full sender names,
+        addresses, or letter contents.
+      </p>
+      <p>
+        <a id="officialCatalogLink" href="https://www.luigimangioneinfo.com/pages/mail-catalog/" target="_blank" rel="noopener noreferrer">Official mail-catalog page</a>
+        · <a href="https://github.com/gl1tchk1ss/GhostPost" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+      </p>
+    </section>
 
-        searchInput.addEventListener('keyup', function () {
-            const filter = searchInput.value.toLowerCase();
-            for (let i = 1; i < rows.length; i++) {
-                const cells = rows[i].getElementsByTagName('td');
-                let match = false;
-                for (let j = 0; j < cells.length; j++) {
-                    if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
-                        match = true;
-                        break;
-                    }
-                }
-                rows[i].style.display = match ? '' : 'none';
-            }
-        });
-    </script>
+    <section>
+      <h2>Catalog</h2>
+      <div class="stats">
+        <div class="stat"><strong id="statVisible">0</strong><span>visible entries</span></div>
+        <div class="stat"><strong id="statPages">0/0</strong><span>source pages transcribed</span></div>
+        <div class="stat"><strong id="statGeo">0</strong><span>geographic-label entries</span></div>
+        <div class="stat"><strong id="statReview">0</strong><span>needs review</span></div>
+      </div>
+
+      <div class="filters">
+        <input id="searchInput" type="search" placeholder="Search initials, origin, dates, raw entry…" aria-label="Search catalog">
+        <select id="originFilter" aria-label="Filter by origin type">
+          <option value="">All origins</option>
+          <option value="zip_suffix">ZIP suffix</option>
+          <option value="geographic_label">Geographic label</option>
+          <option value="unknown">Unknown</option>
+        </select>
+        <select id="postmarkFilter" aria-label="Filter by postmark status">
+          <option value="">All postmarks</option>
+          <option value="known">Known</option>
+          <option value="unknown">Unknown</option>
+          <option value="not_listed">Not listed</option>
+        </select>
+        <select id="reviewFilter" aria-label="Filter by transcription status">
+          <option value="">All transcription statuses</option>
+          <option value="reviewed">Reviewed</option>
+          <option value="needs_review">Needs review</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Received</th>
+              <th>Initials</th>
+              <th>Origin</th>
+              <th>Postmark</th>
+              <th>Raw entry</th>
+              <th>Source</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="catalogBody">
+            <tr><td colspan="7" class="empty">Loading catalog…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      The handwritten source is authoritative over this transcription. Ambiguous characters are preserved as
+      question marks and flagged for review rather than silently guessed.
+    </footer>
+  </main>
+
+  <script>
+    const state = { payload: null, entries: [] };
+
+    const els = {
+      body: document.getElementById('catalogBody'),
+      coverage: document.getElementById('coverageText'),
+      search: document.getElementById('searchInput'),
+      origin: document.getElementById('originFilter'),
+      postmark: document.getElementById('postmarkFilter'),
+      review: document.getElementById('reviewFilter'),
+      visible: document.getElementById('statVisible'),
+      pages: document.getElementById('statPages'),
+      geo: document.getElementById('statGeo'),
+      reviewCount: document.getElementById('statReview')
+    };
+
+    function makeCell(value) {
+      const td = document.createElement('td');
+      td.textContent = value ?? '';
+      return td;
+    }
+
+    function makeSourceCell(entry) {
+      const td = document.createElement('td');
+      const link = document.createElement('a');
+      const base = state.payload.source.document_url;
+      link.href = `${base}#page=${entry.source_page}`;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = `p.${entry.source_page} · #${entry.source_entry}`;
+      td.appendChild(link);
+      return td;
+    }
+
+    function makeStatusCell(entry) {
+      const td = document.createElement('td');
+      const badge = document.createElement('span');
+      const needsReview = entry.transcription_status === 'needs_review';
+      badge.className = `badge ${needsReview ? 'review' : 'ok'}`;
+      badge.textContent = needsReview ? 'needs review' : 'reviewed';
+      td.appendChild(badge);
+      if (entry.notes) {
+        const note = document.createElement('div');
+        note.className = 'muted';
+        note.textContent = entry.notes;
+        td.appendChild(note);
+      }
+      return td;
+    }
+
+    function render(entries) {
+      els.body.replaceChildren();
+
+      if (!entries.length) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.colSpan = 7;
+        cell.className = 'empty';
+        cell.textContent = 'No entries match those filters.';
+        row.appendChild(cell);
+        els.body.appendChild(row);
+      }
+
+      for (const entry of entries) {
+        const row = document.createElement('tr');
+        row.appendChild(makeCell(entry.received_date));
+        row.appendChild(makeCell(entry.sender_initials));
+        row.appendChild(makeCell(entry.origin_type === 'geographic_label' ? `[${entry.origin_value}]` : entry.origin_value));
+        row.appendChild(makeCell(entry.postmark_raw || entry.postmark_status));
+        row.appendChild(makeCell(entry.raw_entry));
+        row.appendChild(makeSourceCell(entry));
+        row.appendChild(makeStatusCell(entry));
+        els.body.appendChild(row);
+      }
+
+      els.visible.textContent = entries.length.toLocaleString();
+    }
+
+    function applyFilters() {
+      const query = els.search.value.trim().toLowerCase();
+      const origin = els.origin.value;
+      const postmark = els.postmark.value;
+      const review = els.review.value;
+
+      const filtered = state.entries.filter(entry => {
+        const haystack = [
+          entry.received_date,
+          entry.sender_initials,
+          entry.origin_value,
+          entry.postmark_date,
+          entry.postmark_raw,
+          entry.raw_entry,
+          entry.notes
+        ].join(' ').toLowerCase();
+
+        return (!query || haystack.includes(query)) &&
+          (!origin || entry.origin_type === origin) &&
+          (!postmark || entry.postmark_status === postmark) &&
+          (!review || entry.transcription_status === review);
+      });
+
+      render(filtered);
+    }
+
+    async function loadCatalog() {
+      try {
+        const response = await fetch('catalog.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const payload = await response.json();
+        state.payload = payload;
+        state.entries = payload.entries || [];
+
+        const totalPages = payload.source.page_count || 0;
+        const transcribedPages = payload.transcribed_pages || [];
+        els.coverage.textContent = ` ${transcribedPages.length} of ${totalPages} source pages currently transcribed. Official source coverage: ${payload.source.coverage_start} through ${payload.source.coverage_end}.`;
+        els.pages.textContent = `${transcribedPages.length}/${totalPages}`;
+        els.geo.textContent = state.entries.filter(entry => entry.origin_type === 'geographic_label').length.toLocaleString();
+        els.reviewCount.textContent = state.entries.filter(entry => entry.transcription_status === 'needs_review').length.toLocaleString();
+
+        render(state.entries);
+      } catch (error) {
+        console.error(error);
+        els.coverage.textContent = ' Catalog data could not be loaded.';
+        els.body.innerHTML = '<tr><td colspan="7" class="error">Could not load catalog.json. Run python scripts/build_catalog.py and serve the repository over HTTP.</td></tr>';
+      }
+    }
+
+    [els.search, els.origin, els.postmark, els.review].forEach(control => {
+      control.addEventListener('input', applyFilters);
+      control.addEventListener('change', applyFilters);
+    });
+
+    loadCatalog();
+  </script>
 </body>
-
 </html>

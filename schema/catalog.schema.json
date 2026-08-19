@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gl1tchk1ss/GhostPost/schema/catalog.schema.json",
+  "title": "GhostPost catalog entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "received_date",
+    "sender_initials",
+    "origin_type",
+    "origin_value",
+    "postmark_date",
+    "postmark_raw",
+    "postmark_status",
+    "source_page",
+    "source_entry",
+    "source_marker",
+    "raw_entry",
+    "transcription_status",
+    "notes"
+  ],
+  "properties": {
+    "received_date": {"type": "string", "format": "date"},
+    "sender_initials": {"type": "string", "minLength": 1, "maxLength": 4},
+    "origin_type": {"enum": ["zip_suffix", "geographic_label", "unknown"]},
+    "origin_value": {"type": "string", "minLength": 1},
+    "postmark_date": {"type": "string"},
+    "postmark_raw": {"type": "string"},
+    "postmark_status": {"enum": ["known", "unknown", "not_listed"]},
+    "source_page": {"type": "integer", "minimum": 1},
+    "source_entry": {"type": "integer", "minimum": 1},
+    "source_marker": {"type": "string"},
+    "raw_entry": {"type": "string", "minLength": 1},
+    "transcription_status": {"enum": ["reviewed", "needs_review"]},
+    "notes": {"type": "string"}
+  }
+}

@@ -1,2 +1,13 @@
-*.csv
-*.json
+# Python cruft
+__pycache__/
+*.py[cod]
+.venv/
+
+# OS/editor noise
+.DS_Store
+.vscode/
+.idea/
+
+# Local scratch exports. Canonical data/*.csv and catalog.json are tracked.
+*.working.csv
+*.scratch.json
